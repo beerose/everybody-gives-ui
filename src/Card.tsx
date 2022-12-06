@@ -1,9 +1,40 @@
-export interface CardProps extends React.ComponentPropsWithoutRef<"div"> {}
+import { XIcon } from "@heroicons/react/outline"
 
-export const Card = ({children}: CardProps) => (
-  <div className="w-full flex items-center justify-center">
-    <div className="bg-white border-2 border-black rounded-xl p-6 sm:p-10 w-full sm:w-5/6 md:w-2/3 lg:w-2/5">
-      {children}
+export interface CardProps extends React.ComponentPropsWithoutRef<"div"> {
+  title: string
+  onDelete?: () => void,
+  href?: string,
+}
+
+export const Card = ({ title, onDelete, id, href, className = "", ...rest }: CardProps) => {
+ return (
+    <div
+      className={
+        "col-span-1 flex flex-col rounded-lg text-center shadow border-2 border-black " + className || ""
+      }
+      id={id}
+      {...rest}
+    >
+      {onDelete && (
+        <button
+          type="button"
+          onClick={onDelete}
+          className="m-2 self-end text-gray-400 hover:text-gray-700 inline-flex items-center rounded-full border border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          <XIcon className="h-5 w-5" aria-hidden="true" />
+        </button>
+      )}
+      {href ? (
+        <a href={href}>
+          <div className="flex flex-1 flex-col p-4 break-words">
+            <h3 className="font-medium text-gray-700">{title}</h3>
+          </div>
+        </a>
+      ): (
+        <div className="flex flex-1 flex-col p-4 break-words">
+          <h3 className="font-medium text-gray-700">{title}</h3>
+        </div>
+      )}
     </div>
-  </div>
-)
+  )
+}

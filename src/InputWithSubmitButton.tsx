@@ -1,14 +1,14 @@
 import { useState } from "react"
 
-export interface NewMemberInput {
+export interface InputWithSubmitButtonProps {
   onSubmit: (value: string) => void
 }
 
-export const NewMemberInput = ({ onSubmit }: NewMemberInput) => {
+export const InputWithSubmitButton = ({ onSubmit }: InputWithSubmitButtonProps) => {
   const [value, setValue] = useState("")
 
   return (
-    <li className="grid grid-cols-1 gap-6 sm:grid-cols-4 pb-6">
+    <div className="flex space-x-3">
       <input
         type="text"
         value={value}
@@ -26,6 +26,6 @@ export const NewMemberInput = ({ onSubmit }: NewMemberInput) => {
       >
         Add
       </button>
-    </li>
+    </div>
   )
 }
